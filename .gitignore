@@ -1,0 +1,14 @@
+/venv
+project/__pycache__/config.cpython-310.pyc
+project/__pycache__/constants.cpython-310.pyc
+project/__pycache__/container.cpython-310.pyc
+project/__pycache__/setup_db.cpython-310.pyc
+project/dao/__pycache__/__init__.cpython-310.pyc
+project/dao/__pycache__/director.cpython-310.pyc
+project/dao/__pycache__/genre.cpython-310.pyc
+project/dao/__pycache__/movie.cpython-310.pyc
+project/dao/model/__pycache__/__init__.cpython-310.pyc
+project/dao/model/__pycache__/director.cpython-310.pyc
+project/dao/model/__pycache__/genre.cpython-310.pyc
+project/dao/model/__pycache__/movie.cpython-310.pyc
+project/views/main/__pycache__/directors.cpython-310.pyc

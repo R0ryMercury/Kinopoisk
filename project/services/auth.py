@@ -3,7 +3,7 @@ from loguru import logger
 from project.dao.auth import AuthDao
 from project.helpers import (
     check_password,
-    check_tokens,
+    encode_token,
     generate_tokens,
     get_hashed_password,
 )
@@ -37,6 +37,30 @@ class AuthService:
         abort(404)
 
     def new_tokens(self, tokens):
-        if user_d := check_tokens(tokens):
+        if user_d := encode_token(tokens.get("refresh_token")):
             return generate_tokens(user_d)
         abort(404)
+
+    def get_info(self, token):
+        if user_d := encode_token(token):
+            return self.dao.get_user(user_d)
+        abort(404)
+
+    def patch(self, token, user_d):
+        user = self.get_info(token)
+
+        if name := user_d.get("name"):
+            user.name = name
+        if surname := user_d.get("surname"):
+            user.name = surname
+        if favorite_genre := user_d.get("favorite_genre"):
+            user.name = favorite_genre
+
+        self.dao.update(user)
+
+    def update_pass(self, token, old_pass, new_pass):
+        user = self.get_info(token)
+        if not check_password(old_pass, user.password):
+            abort(404)
+        user.password = get_hashed_password(new_pass)
+        self.dao.update(user)

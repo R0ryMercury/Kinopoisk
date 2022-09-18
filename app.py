@@ -6,6 +6,7 @@ from project.views.main.directors import directors_ns
 from project.views.main.genres import genres_ns
 from project.views.main.movies import movies_ns
 from project.views.auth.auth import auth_ns
+from project.views.auth.user import user_ns
 from project.setup_db import db
 
 # функция создания основного объекта app
@@ -33,11 +34,7 @@ def register_extensions(app):
     api.add_namespace(movies_ns)
     api.add_namespace(directors_ns)
     api.add_namespace(auth_ns)
-
-
-# def create_data(app, db):
-#     with app.app_context():
-#         db.create_all()
+    api.add_namespace(user_ns)
 
 
 app = create_app(Config())

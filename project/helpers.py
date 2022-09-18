@@ -2,6 +2,7 @@ import calendar
 import datetime
 import bcrypt
 import jwt
+from flask import request, abort
 from project.constants import (
     JWT_ALGORITHM,
     JWT_SECRET,
@@ -35,12 +36,25 @@ def generate_tokens(data):
     }
 
 
-def check_tokens(tokens):
-
+def encode_token(token):
     try:
-        data = jwt.decode(
-            tokens["refresh_token"], JWT_SECRET, algorithms=[JWT_ALGORITHM]
-        )
+        data = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
     except Exception:
         return False
     return data
+
+
+def auth_required(func):
+    def wrapper(*args, **kwargs):
+        if "Authorization" not in request.headers:
+            abort(401)
+
+        data = request.headers["Authorization"]
+        token = data.split("Bearer ")[-1]
+        try:
+            jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+        except Exception:
+            abort(401)
+        return func(*args, *kwargs)
+
+    return wrapper

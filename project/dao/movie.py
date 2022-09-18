@@ -13,21 +13,16 @@ class MovieDao:
         return self.session.query(Movie).all()
 
     def get_new_on_page(self, page):
-        return (
-            self.session.query(Movie)
-            .order_by(Movie.year)
-            .limit(MOVIES_PER_PAGE)
-            .offset(MOVIES_PER_PAGE * page)
-            .all()
-        )
+        query = self.session.query(Movie).order_by(Movie.year.desc())
+        return query.limit(MOVIES_PER_PAGE).offset(MOVIES_PER_PAGE * (page - 1)).all()
 
     def get_new_all(self):
-        return self.session.query(Movie).order_by(Movie.year).all()
+        return self.session.query(Movie).order_by(Movie.year.desc()).all()
 
     def get_on_page(self, page):
         return (
             self.session.query(Movie)
             .limit(MOVIES_PER_PAGE)
-            .offset(MOVIES_PER_PAGE * page)
+            .offset(MOVIES_PER_PAGE * (page-1))
             .all()
         )

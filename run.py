@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_restx import Api
 from project.config import Config
 from project.views.main.directors import directors_ns
@@ -8,7 +8,9 @@ from project.setup_db import db
 
 # функция создания основного объекта app
 def create_app(config_object):
-    app = Flask(__name__)
+    app = Flask(
+        __name__, template_folder="project/templates", static_folder="project/static"
+    )
     app.config.from_object(config_object)
     register_extensions(app)
     return app
@@ -29,6 +31,12 @@ def create_data(app, db):
 
 
 app = create_app(Config())
+
+
+@app.route("/main/")
+def main_page():
+    return render_template("index.html")
+
 
 if __name__ == "__main__":
     app.run(host="localhost", port=10001, debug=True)

@@ -10,13 +10,14 @@ class MovieService:
 
     def get_all(self, filters):
         status = filters.get("status")
-        page = filters.get("page")
+        if page := filters.get("page"):
+            page = int(page)
         if status == "new":
-            if isinstance(page, int):
+            if page and page > 0:
                 movies = self.dao.get_new_on_page(page)
             else:
                 movies = self.dao.get_new_all()
-        elif isinstance(page, int):
+        elif page and page > 0:
             movies = self.dao.get_on_page(page)
         else:
             movies = self.dao.get_all()

@@ -9,4 +9,7 @@ class AuthDao:
         ent = User(**user_d)
         self.session.add(ent)
         self.session.commit()
-    
+
+    def get_user(self, user_d):
+        email = user_d.get("email")
+        return self.session.query(User).filter(User.email == email).first()

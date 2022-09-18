@@ -1,0 +1,138 @@
+2022-09-18T15:22:37.369638+0300 ERROR An error has been caught in function 'post', process 'MainProcess' (10216), thread 'Thread-2 (process_request_thread)' (10276):
+Traceback (most recent call last):
+
+  File "D:\python\lib\threading.py", line 973, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x00000218EF53B130>
+    └ <Thread(Thread-2 (process_request_thread), started daemon 10276)>
+
+  File "D:\python\lib\threading.py", line 1016, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x00000218EF53AE60>
+    └ <Thread(Thread-2 (process_request_thread), started daemon 10276)>
+
+  File "D:\python\lib\threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-2 (process_request_thread), started daemon 10276)>
+    │    │        │    └ (<socket.socket fd=876, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10001), raddr...
+    │    │        └ <Thread(Thread-2 (process_request_thread), started daemon 10276)>
+    │    └ <bound method ThreadingMixIn.process_request_thread of <werkzeug.serving.ThreadedWSGIServer object at 0x00000218F339FE50>>
+    └ <Thread(Thread-2 (process_request_thread), started daemon 10276)>
+
+  File "D:\python\lib\socketserver.py", line 683, in process_request_thread
+    self.finish_request(request, client_address)
+    │    │              │        └ ('127.0.0.1', 52799)
+    │    │              └ <socket.socket fd=876, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10001), raddr=...
+    │    └ <function BaseServer.finish_request at 0x00000218EF581120>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x00000218F339FE50>
+
+  File "D:\python\lib\socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    │    │                   │        │               └ <werkzeug.serving.ThreadedWSGIServer object at 0x00000218F339FE50>
+    │    │                   │        └ ('127.0.0.1', 52799)
+    │    │                   └ <socket.socket fd=876, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 10001), raddr=...
+    │    └ <class 'werkzeug.serving.WSGIRequestHandler'>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x00000218F339FE50>
+
+  File "D:\python\lib\socketserver.py", line 747, in __init__
+    self.handle()
+    │    └ <function WSGIRequestHandler.handle at 0x00000218F12BE950>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x00000218F34A0130>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\werkzeug\serving.py", line 342, in handle
+    BaseHTTPRequestHandler.handle(self)
+    │                      │      └ <werkzeug.serving.WSGIRequestHandler object at 0x00000218F34A0130>
+    │                      └ <function BaseHTTPRequestHandler.handle at 0x00000218F1150670>
+    └ <class 'http.server.BaseHTTPRequestHandler'>
+
+  File "D:\python\lib\http\server.py", line 425, in handle
+    self.handle_one_request()
+    │    └ <function WSGIRequestHandler.handle_one_request at 0x00000218F12BEB00>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x00000218F34A0130>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\werkzeug\serving.py", line 374, in handle_one_request
+    self.run_wsgi()
+    │    └ <function WSGIRequestHandler.run_wsgi at 0x00000218F12BE8C0>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x00000218F34A0130>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\werkzeug\serving.py", line 319, in run_wsgi
+    execute(self.server.app)
+    │       │    │      └ <werkzeug.debug.DebuggedApplication object at 0x00000218F336BB80>
+    │       │    └ <werkzeug.serving.ThreadedWSGIServer object at 0x00000218F339FE50>
+    │       └ <werkzeug.serving.WSGIRequestHandler object at 0x00000218F34A0130>
+    └ <function WSGIRequestHandler.run_wsgi.<locals>.execute at 0x00000218F341EF80>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\werkzeug\serving.py", line 310, in execute
+    for data in application_iter:
+                └ <generator object DebuggedApplication.debug_application at 0x00000218F3362650>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\werkzeug\debug\__init__.py", line 309, in debug_application
+    app_iter = self.app(environ, start_response)
+               │    │   │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x00000218F341F7F0>
+               │    │   └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=876>, 'wsgi.errors': <_io.TextIOWr...
+               │    └ <Flask 'run'>
+               └ <werkzeug.debug.DebuggedApplication object at 0x00000218F336BB80>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\flask\app.py", line 2091, in __call__
+    return self.wsgi_app(environ, start_response)
+           │    │        │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x00000218F341F7F0>
+           │    │        └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=876>, 'wsgi.errors': <_io.TextIOWr...
+           │    └ <function Flask.wsgi_app at 0x00000218F1BAF1C0>
+           └ <Flask 'run'>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+               │    └ <function Flask.full_dispatch_request at 0x00000218F1BAE7A0>
+               └ <Flask 'run'>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+         │    └ <function Flask.dispatch_request at 0x00000218F1BAE710>
+         └ <Flask 'run'>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+           │    │           │    │              │    │            │   └ {}
+           │    │           │    │              │    │            └ <Request 'http://localhost:10001/auth/login' [POST]>
+           │    │           │    │              │    └ 'auth_login_view'
+           │    │           │    │              └ <Rule '/auth/login' (PUT, POST, OPTIONS) -> auth_login_view>
+           │    │           │    └ {'static': <function Flask.__init__.<locals>.<lambda> at 0x00000218F336D6C0>, 'specs': <function View.as_view.<locals>.view a...
+           │    │           └ <Flask 'run'>
+           │    └ <function Flask.ensure_sync at 0x00000218F1BAEA70>
+           └ <Flask 'run'>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\flask_restx\api.py", line 403, in wrapper
+    resp = resource(*args, **kwargs)
+           │         │       └ {}
+           │         └ ()
+           └ <function View.as_view.<locals>.view at 0x00000218F336F1C0>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\flask\views.py", line 84, in view
+    return current_app.ensure_sync(self.dispatch_request)(*args, **kwargs)
+           │                       │    │                  │       └ {}
+           │                       │    │                  └ ()
+           │                       │    └ <function Resource.dispatch_request at 0x00000218F1EC6290>
+           │                       └ <project.views.auth.auth.LoginView object at 0x00000218F34A0DC0>
+           └ <Flask 'run'>
+
+  File "C:\Users\Georgii\Desktop\pr\homework\Kinopoisk\env\lib\site-packages\flask_restx\resource.py", line 49, in dispatch_request
+    resp = meth(*args, **kwargs)
+           │     │       └ {}
+           │     └ ()
+           └ <bound method LoginView.post of <project.views.auth.auth.LoginView object at 0x00000218F34A0DC0>>
+
+> File "c:\Users\Georgii\Desktop\pr\homework\Kinopoisk\project\views\auth\auth.py", line 20, in post
+    tokens = auth_service.login(req_json)
+             │            │     └ {'email': '1234djlkja@gmail.com', 'password': 'Very_strong_pass'}
+             │            └ <function AuthService.login at 0x00000218F336C8B0>
+             └ <project.services.auth.AuthService object at 0x00000218F3368E80>
+
+  File "c:\Users\Georgii\Desktop\pr\homework\Kinopoisk\project\services\auth.py", line 35, in login
+    if check_password(user_d.get("password"), user.password):
+       │              │      │                └ [<User 1>]
+       │              │      └ <method 'get' of 'dict' objects>
+       │              └ {'email': '1234djlkja@gmail.com', 'password': 'Very_strong_pass'}
+       └ <function check_password at 0x00000218F3236560>
+
+AttributeError: 'list' object has no attribute 'password'

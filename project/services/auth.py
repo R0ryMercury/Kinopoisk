@@ -52,15 +52,15 @@ class AuthService:
         if name := user_d.get("name"):
             user.name = name
         if surname := user_d.get("surname"):
-            user.name = surname
+            user.surname = surname
         if favorite_genre := user_d.get("favorite_genre"):
-            user.name = favorite_genre
+            user.favorite_genre = favorite_genre
 
         self.dao.update(user)
 
     def update_pass(self, token, old_pass, new_pass):
         user = self.get_info(token)
         if not check_password(old_pass, user.password):
-            abort(404)
+            abort(401)
         user.password = get_hashed_password(new_pass)
         self.dao.update(user)

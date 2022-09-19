@@ -8,5 +8,6 @@ class TestAuthService:
         client = test_app.test_client()
         resp = client.get("/user/", headers=headers)
         data = resp.data
-        assert data.get("name")
         assert resp.status_code == 200
+        assert data.get("name")
+        

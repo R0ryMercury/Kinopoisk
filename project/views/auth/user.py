@@ -1,26 +1,26 @@
-from loguru import logger
-from flask import request
+from flask import request, jsonify
 from flask_restx import Namespace, Resource
 from project.container import auth_service
-from project.dao.model.user import UserSchema
+from project.dao.model.user import User, UserSchema
 from project.helpers import auth_required
 
 user_ns = Namespace("user")
 user_schema = UserSchema()
 
 
-@user_ns.route("")
+@user_ns.route("/")
 class UserView(Resource):
     @auth_required
     def get(self):
         token = request.headers["Authorization"].split("Bearer ")[-1]
-        user = auth_service.get_info(token)
-        return user_schema.dumps(user), 200
+        user: User = auth_service.get_info(token)
+        return user_schema.dump(user), 200
 
     @auth_required
     def patch(self):
         token = request.headers["Authorization"].split("Bearer ")[-1]
-        auth_service.patch(token)
+        req_json = request.json
+        auth_service.patch(token, req_json)
         return "", 204
 
 

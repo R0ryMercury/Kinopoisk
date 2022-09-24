@@ -45,7 +45,7 @@ def create_tables():
     db.create_all()
 
 
-@app.route("/main/")
+@app.route("/main/")# в разработке
 def main_page():
     return render_template("index.html")
 

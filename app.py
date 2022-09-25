@@ -22,6 +22,11 @@ def create_app(config_object):
         __name__, template_folder="project/templates", static_folder="project/static"
     )
     app.config.from_object(config_object)
+
+    @app.route("/")
+    def index():
+        return render_template("index.html")
+
     register_extensions(app)
     return app
 
@@ -29,7 +34,7 @@ def create_app(config_object):
 # функция подключения расширений
 def register_extensions(app):
     db.init_app(app)
-    api = Api(app)
+    api = Api(app, title="Flask Course Project 3", doc="/docs")
     api.add_namespace(genres_ns)
     api.add_namespace(movies_ns)
     api.add_namespace(directors_ns)
@@ -43,11 +48,6 @@ app = create_app(Config())
 @app.before_first_request
 def create_tables():
     db.create_all()
-
-
-@app.route("/main/")# в разработке
-def main_page():
-    return render_template("index.html")
 
 
 if __name__ == "__main__":

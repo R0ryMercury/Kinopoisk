@@ -22,7 +22,7 @@ class MoviesView(Resource):
         return movies_schema.dump(all_movies), 200
 
 
-@movies_ns.route("/<int:mid>")
+@movies_ns.route("/<int:mid>/")
 class MovieView(Resource):
     def get(self, mid):
 

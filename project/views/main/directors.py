@@ -16,7 +16,7 @@ class DirectorsView(Resource):
         return directors_schema.dump(all_directors), 200
 
 
-@directors_ns.route("/<int:did>")
+@directors_ns.route("/<int:did>/")
 class DirectorView(Resource):
     def get(self, did):
         if director := director_service.get_one(did):

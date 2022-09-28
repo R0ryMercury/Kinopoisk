@@ -16,7 +16,7 @@ class GenresView(Resource):
         return genres_schema.dump(all_genres), 200
 
 
-@genres_ns.route("/<int:gid>")
+@genres_ns.route("/<int:gid>/")
 class GenreView(Resource):
     def get(self, gid):
         if genre := genre_service.get_one(gid):

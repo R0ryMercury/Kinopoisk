@@ -2,6 +2,8 @@ from flask import request, abort
 from flask_restx import Namespace, Resource
 from project.dao.model.movie import MovieSchema
 from project.container import movie_service
+from project.dao.model.movie import Movie
+from project.setup_db import db
 
 movies_ns = Namespace("movies")
 

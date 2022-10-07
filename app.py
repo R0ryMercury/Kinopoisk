@@ -34,6 +34,7 @@ def create_app(config_object):
 # функция подключения расширений
 def register_extensions(app):
     db.init_app(app)
+
     api = Api(app, title="Flask Course Project 3", doc="/docs")
     api.add_namespace(genres_ns)
     api.add_namespace(movies_ns)
@@ -48,6 +49,9 @@ app = create_app(Config())
 @app.before_first_request
 def create_tables():
     db.create_all()
+
+
+
 
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ from project.views.main.movies import movies_ns
 from project.views.auth.auth import auth_ns
 from project.views.auth.user import user_ns
 from project.setup_db import db
-from project.dao.model.movie import Movie
+
 
 # функция создания основного объекта app
 def create_app(config_object):
